@@ -8,6 +8,9 @@ import ru.mirea.springpizzashop.repositories.ProductTypeRepository;
 
 import java.util.List;
 
+/**
+ * Сервис для работы с категориями продуктов
+ */
 @Service
 @RequiredArgsConstructor
 public class ProductTypeService {
@@ -18,18 +21,30 @@ public class ProductTypeService {
         this.productTypeRepository = productTypeRepository;
     }
 
+    /**
+     * Создание нового типа продуктов
+     * @param productType
+     * @see ProductType
+     */
     public void addProductType(ProductType productType){
         productTypeRepository.save(productType);
     }
 
-    public void deleteProductType(Long id){
-        productTypeRepository.deleteProductTypeById(id);
-    }
 
+    /**
+     * Получение типа продуктов
+     * @param id - ид типа
+     * @return Категории продуктов
+     * @see ProductType
+     */
     public ProductType getProductTypeById(Long id){
         return productTypeRepository.findProductTypeById(id);
     }
 
+    /**
+     * Получение списка категорий
+     * @return список категорий
+     */
     public List<ProductType> getAllProductTypes(){
         return productTypeRepository.findAll();
     }

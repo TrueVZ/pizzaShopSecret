@@ -27,6 +27,12 @@ public class UserService implements UserDetailsService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
 
+    /**
+     * Создание нового пользователя
+     * @param user
+     * @return true - если пользовательно удачно создан, false - если пользователь с таким никнеймом либо почтой уже создан
+     * @see User
+     */
     public boolean addUser(User user) {
         User user1 = userRepository.findByUsernameOrEmail(user.getUsername(), user.getEmail());
         if (user1 != null){
@@ -42,6 +48,13 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
+    /**
+     * Получение пользователя
+     * @param s никнейм пользователя
+     * @return User
+     * @throws UsernameNotFoundException
+     * @see User
+     */
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return userRepository.findByUsername(s);

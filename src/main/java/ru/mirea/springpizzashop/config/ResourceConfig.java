@@ -6,6 +6,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+/**
+ * Configuration class for MVC
+ */
 public class ResourceConfig implements WebMvcConfigurer {
 
 

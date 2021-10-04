@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.mirea.springpizzashop"},{"l":"ru.mirea.springpizzashop.config"},{"l":"ru.mirea.springpizzashop.controllers"},{"l":"ru.mirea.springpizzashop.models"},{"l":"ru.mirea.springpizzashop.repositories"},{"l":"ru.mirea.springpizzashop.services"}];updateSearchResults();

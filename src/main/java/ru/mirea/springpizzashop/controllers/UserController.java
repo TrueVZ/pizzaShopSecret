@@ -25,6 +25,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Контроллер для всех пользователей
+ */
 @Controller
 @RequestMapping("/")
 public class UserController {
@@ -45,10 +48,15 @@ public class UserController {
         this.purchaseService = purchaseService;
     }
 
+    /**
+     * Стартовая страница
+     * @return
+     */
     @GetMapping("/")
     public String index(){
         return "redirect:/home";
     }
+
 
     @GetMapping("/register")
     public String getRegister(Model model){
@@ -56,6 +64,11 @@ public class UserController {
         return "register";
     }
 
+    /**
+     * Регистрация нового пользователя
+     * @param model
+     * @return
+     */
     @PostMapping("/register")
     public String postRegister(@ModelAttribute("user") User userForm, Map<String, Object> model){
         if(!userService.addUser(userForm)){
@@ -65,6 +78,12 @@ public class UserController {
         return "redirect:/login";
     }
 
+    /**
+     * Домашняя страница пользователя
+     * @param authentication
+     * @param model
+     * @return
+     */
     @GetMapping("/home")
     public String index(Authentication authentication, Model model){
 
@@ -73,6 +92,12 @@ public class UserController {
         return "home";
     }
 
+    /**
+     * Ручка для получения изображение по id продукта
+     * @param id
+     * @param response
+     * @throws IOException
+     */
     @GetMapping("/product/image/{id}")
     public void showImage(@PathVariable Long id, HttpServletResponse response) throws IOException {
         response.setContentType("image/png");
@@ -80,6 +105,12 @@ public class UserController {
         IOUtils.copy(is, response.getOutputStream());
     }
 
+    /**
+     * Добавление продукта в корзину пользователя
+     * @param authentication
+     * @param id
+     * @param model
+     */
     @ResponseBody
     @PostMapping("/cart/addProduct/{productId}")
     public void addPurchase(Authentication authentication, @PathVariable("productId")Long id, Model model){
@@ -103,12 +134,22 @@ public class UserController {
 //        return "redirect:/home";
     }
 
+    /**
+     * Удадение продукта из корзины пользователя
+     * @param id
+     * @return
+     */
     @GetMapping("/cart/delete/{purchaseId}")
     public String deletePurchase(@PathVariable("purchaseId")Long id){
         purchaseService.deletePurchase(id);
         return "redirect:/cart";
     }
 
+    /**
+     * Завершение покупок пользователя и очистка корзины
+     * @param authentication
+     * @return
+     */
     @GetMapping("/cart/check")
     public String checkOut(Authentication authentication){
         long userId = ((User) userService.loadUserByUsername(authentication.getName())).getId();
@@ -117,6 +158,12 @@ public class UserController {
     }
 
 
+    /**
+     * Получение корзины пользователя
+     * @param authentication
+     * @param model
+     * @return
+     */
     @GetMapping("/cart")
     public String getCart(Authentication authentication, Model model){
         User user = ((User) userService.loadUserByUsername(authentication.getName()));
