@@ -41,13 +41,13 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="product : ${listProducts}">
+    <tr id="products" th:each="product : ${listProducts}">
         <th scope="row" th:text="${product.id}"></th>
         <td><img th:src="@{'product/image/{id}'(id=${product.id})}" width="300px"></td>
-        <td th:text="${product.name}"></td>
-        <td th:text="${product.description}"></td>
-        <td th:text="${product.price}"></td>
-        <td th:text="${product.productType.name}"></td>
+        <td id="name" th:text="${product.name}"></td>
+        <td id="descr" th:text="${product.description}"></td>
+        <td id="product_price" th:text="${product.price}"></td>
+        <td id="productType" th:text="${product.productType.name}"></td>
         <td>
             <a href="#"
                th:href="@{'/admin/products/'+ ${product.id}}"
